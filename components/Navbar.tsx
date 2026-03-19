@@ -13,18 +13,26 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav style={{ backgroundColor: "#f3c400" }} className="border-b-4 border-black text-slate-900">
+    <nav style={{ backgroundColor: "#f3c400" }} className="border-b-4 border-black text-slate-900 shadow-[0_4px_0_0_#000]">
       <div className="max-w-6xl mx-auto border-x-2 border-black">
         <div className="hidden md:flex min-h-[120px] items-stretch">
-          <Link href="/" className="flex flex-1 items-center gap-3 border-r-4 border-black px-6">
-            <span className="text-3xl leading-none">Logo</span>
-            <span className="text-2xl font-semibold tracking-tight">DS Desentupimentos</span>
+          <Link href="/" className="flex flex-1 items-center gap-4 border-r-4 border-black px-6 bg-yellow-300/40 hover:bg-yellow-300/60 transition-colors duration-200">
+            <span
+              aria-hidden="true"
+              className="inline-flex h-14 w-14 items-center justify-center border-2 border-black bg-white text-xs font-bold tracking-wide"
+            >
+              LOGO
+            </span>
+            <span className="flex flex-col">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-700">Opcional</span>
+              <span className="text-2xl font-semibold tracking-tight font-display">DS Desentupimentos</span>
+            </span>
           </Link>
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="flex min-w-44 px-6 items-center justify-center border-r-4 border-black text-2xl lg:text-3xl font-medium leading-tight hover:bg-yellow-300 transition-colors duration-200 last:border-r-0"
+              className="flex min-w-44 px-6 items-center justify-center border-r-4 border-black text-2xl lg:text-3xl font-medium leading-tight hover:bg-yellow-300 transition-colors duration-200 last:border-r-0 font-display"
             >
               {link.label}
             </Link>
@@ -33,7 +41,13 @@ export default function Navbar() {
 
         <div className="flex items-center justify-between px-4 py-3 md:hidden">
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-xl font-semibold tracking-tight">DS Desentupimentos</span>
+            <span
+              aria-hidden="true"
+              className="inline-flex h-9 w-9 items-center justify-center border-2 border-black bg-white text-[10px] font-bold"
+            >
+              LOGO
+            </span>
+            <span className="text-xl font-semibold tracking-tight font-display">DS Desentupimentos</span>
           </Link>
 
           <button

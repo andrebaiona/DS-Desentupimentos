@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --color-primary: #0249b6;
-  --color-secondary: #a1a49e;
+  --background: #f6f6f3;
+  --foreground: #1f2937;
+  --color-primary: #0b3f91;
+  --color-secondary: #6b7280;
+  --font-body: "Trebuchet MS", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-display: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 @theme inline {
@@ -17,5 +19,20 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+}
+
+[class*="rounded"] {
+  border-radius: 0 !important;
 }
