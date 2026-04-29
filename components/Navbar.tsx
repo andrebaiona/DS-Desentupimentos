@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 
 const navLinks = [
+  { href: "/", label: "Início" },
   { href: "/servicos", label: "Serviços" },
   { href: "/o-nosso-trabalho", label: "O Nosso Trabalho" },
   { href: "/contactos", label: "Contactos" },
@@ -13,72 +15,81 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav style={{ backgroundColor: "#f3c400" }} className="border-b-4 border-black text-slate-900 shadow-[0_4px_0_0_#000]">
-      <div className="max-w-6xl mx-auto border-x-2 border-black">
-        <div className="hidden md:flex min-h-[120px] items-stretch">
-          <Link href="/" className="flex flex-1 items-center gap-4 border-r-4 border-black px-6 bg-yellow-300/40 hover:bg-yellow-300/60 transition-colors duration-200">
-            <span
-              aria-hidden="true"
-              className="inline-flex h-14 w-14 items-center justify-center border-2 border-black bg-white text-xs font-bold tracking-wide"
-            >
-              LOGO
-            </span>
-            <span className="flex flex-col">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-700">Opcional</span>
-              <span className="text-2xl font-semibold tracking-tight font-display">DS Desentupimentos</span>
-            </span>
-          </Link>
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="flex min-w-44 px-6 items-center justify-center border-r-4 border-black text-2xl lg:text-3xl font-medium leading-tight hover:bg-yellow-300 transition-colors duration-200 last:border-r-0 font-display"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
+    <nav style={{ backgroundColor: "#0249b6" }} className="sticky top-0 z-50 text-white shadow-md">
+      <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-24">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 flex-shrink-0">
+          <Image
+            src="/cropped-logo.jpg"
+            alt="DS Desentupimentos"
+            width={100}
+            height={100}
+            className="object-contain"
+          />
+        </Link>
 
-        <div className="flex items-center justify-between px-4 py-3 md:hidden">
-          <Link href="/" className="flex items-center gap-2">
-            <span
-              aria-hidden="true"
-              className="inline-flex h-9 w-9 items-center justify-center border-2 border-black bg-white text-[10px] font-bold"
-            >
-              LOGO
-            </span>
-            <span className="text-xl font-semibold tracking-tight font-display">DS Desentupimentos</span>
-          </Link>
-
-          <button
-            className="flex flex-col gap-1 cursor-pointer"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Menu"
+        {/* Desktop menu - centered */}
+        <div className="hidden md:flex items-center justify-center flex-1">
+          <div
+            style={{ backgroundColor: "rgba(255, 255, 255, 0.15)" }}
+            className="flex gap-1 rounded-full px-2 py-2 backdrop-blur-sm"
           >
-            <span className="block w-6 h-0.5 bg-slate-900"></span>
-            <span className="block w-6 h-0.5 bg-slate-900"></span>
-            <span className="block w-6 h-0.5 bg-slate-900"></span>
-          </button>
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-white hover:bg-white hover:text-blue-600 px-6 py-3 rounded-full font-semibold transition-all duration-200 text-base"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
         </div>
 
-        {menuOpen && (
-          <div className="md:hidden border-t-2 border-black px-4 py-3">
-            <ul className="flex flex-col text-base font-medium">
-              {navLinks.map((link) => (
-                <li key={link.href} className="border-b-2 border-black last:border-b-0">
-                  <Link
-                    href={link.href}
-                    className="block py-2 hover:bg-yellow-300 transition-colors duration-200"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {/* Contact button - desktop */}
+        <Link
+          href="/contactos"
+          className="hidden md:block bg-yellow-300 text-gray-900 font-bold px-8 py-3 rounded-full hover:bg-yellow-400 transition-colors duration-200 flex-shrink-0 text-base"
+        >
+          Contacto
+        </Link>
+
+        {/* Mobile hamburger */}
+        <button
+          className="md:hidden flex flex-col gap-1.5 cursor-pointer"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Menu"
+        >
+          <span className="block w-6 h-0.5 bg-white"></span>
+          <span className="block w-6 h-0.5 bg-white"></span>
+          <span className="block w-6 h-0.5 bg-white"></span>
+        </button>
       </div>
+
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div style={{ backgroundColor: "#0249b6" }} className="md:hidden border-t border-white border-opacity-20">
+          <div className="px-4 py-6 space-y-3">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="block px-6 py-3 text-white hover:bg-white hover:bg-opacity-20 rounded-lg font-semibold transition-all duration-200 text-base"
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              href="/contactos"
+              className="block w-full bg-yellow-300 text-gray-900 font-bold px-6 py-3 rounded-lg hover:bg-yellow-400 transition-colors duration-200 text-center text-base"
+              onClick={() => setMenuOpen(false)}
+            >
+              Contacto
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
